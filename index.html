@@ -26,6 +26,19 @@
       width: 90%;
       max-width: 380px;
       box-shadow: 0 20px 40px rgba(255, 0, 90, 0.35);
+      transition: transform 0.3s ease;
+    }
+
+    .shake {
+      animation: shake 0.6s;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(1deg); }
+      50% { transform: rotate(-1deg); }
+      75% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
     }
 
     h1 {
@@ -93,7 +106,7 @@
 
 <body>
 
-  <div class="card">
+  <div class="card" id="card">
     <h1>Muskan, Will You Be My Valentine? ❤️</h1>
     <p>You make my heart smile every single day.</p>
 
@@ -109,32 +122,41 @@
     let noCount = 0;
     let yesScale = 1;
 
-    function yesClicked() {
-      const message = document.getElementById("message");
-      message.style.display = "block";
-      message.innerHTML =
-        "YAY!!! 💕 You just made me the happiest person alive 💘<br>I love you endlessly ❤️";
-    }
+    const noMessages = [
+      "😲 Are you serious?",
+      "😐 Think again…",
+      "🥺 That kinda hurt, not gonna lie.",
+      "😔 I was so sure you’d say yes.",
+      "😩 Okay now you’re just playing with my heart.",
+      "❤️ At this point, you know the right answer."
+    ];
 
     function noClicked() {
-      noCount++;
       const message = document.getElementById("message");
       const yesBtn = document.getElementById("yesBtn");
 
       message.style.display = "block";
-
-      if (noCount === 1) {
-        message.innerHTML = "😲 Are you serious?";
-      } else if (noCount === 2) {
-        message.innerHTML = "😐 Think again… my heart can’t take this.";
-      } else if (noCount === 3) {
-        message.innerHTML = "🥺 Okay now you’re just teasing me.";
-      } else {
-        message.innerHTML = "❤️ Come on… you know the answer.";
-      }
+      message.innerHTML = noMessages[Math.min(noCount, noMessages.length - 1)];
 
       yesScale += 0.25;
       yesBtn.style.transform = `scale(${yesScale})`;
+
+      noCount++;
+    }
+
+    function yesClicked() {
+      const message = document.getElementById("message");
+      const card = document.getElementById("card");
+
+      card.classList.add("shake");
+
+      message.style.display = "block";
+      message.innerHTML =
+        "🎉 Yay! I knew it 😌💖<br>You just made me the happiest person alive.<br>I love you endlessly ❤️";
+
+      setTimeout(() => {
+        card.classList.remove("shake");
+      }, 600);
     }
 
     // Floating hearts
