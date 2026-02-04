@@ -2,105 +2,155 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine</title>
+<title>Valentine 💖</title>
 
-<!-- Google Font -->
+<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(135deg, #ff7a9e, #ff4f7b);
-    font-family: 'Playfair Display', serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 🔥 FIREWORKS CANVAS */
-#fireworks {
+    .hearts {
     position: fixed;
-    top: 0;
+    bottom: -10px;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 0;
 }
 
+.heart {
+    position: absolute;
+    bottom: 0;
+    font-size: 22px;
+    opacity: 0.8;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Playfair Display', serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* FIREWORK CANVAS */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* CARD STRUCTURE */
 .scene {
-    position: relative;
+    perspective: 1200px;
     z-index: 2;
-    perspective: 1000px;
 }
 
 .card {
     width: 320px;
-    padding: 40px 25px 50px;
-    background: rgba(255, 192, 203, 0.35);
-    border-radius: 22px;
-    text-align: center;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    transition: transform 1s;
+    height: 400px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
 }
 
 .card.flip {
     transform: rotateY(180deg);
 }
 
-h1 {
-    margin-top: -10px;
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    background: rgba(255, 192, 203, 0.35);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    backface-visibility: hidden;
+    padding: 35px 25px;
+    text-align: center;
+}
+
+/* FRONT */
+.front h1 {
     font-size: 32px;
     color: white;
+    margin-bottom: 60px;
     text-shadow: 0 0 15px rgba(255,255,255,0.9);
 }
 
 .buttons {
-    margin-top: 40px;
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
 button {
-    padding: 16px 32px;
-    font-size: 20px;
-    border-radius: 40px;
     border: none;
     cursor: pointer;
-    transition: 0.3s ease;
-    font-family: 'Playfair Display', serif;
+    padding: 16px 34px;
+    font-size: 18px;
+    border-radius: 40px;
+    transition: all 0.3s ease;
 }
 
 #yesBtn {
-    background: #ff1f5a;
+    background: #ff1744;
     color: white;
-    box-shadow: 0 0 20px rgba(255,31,90,0.9);
+    box-shadow: 0 0 20px rgba(255,23,68,0.9);
 }
 
 #noBtn {
     background: white;
-    color: #ff1f5a;
+    color: #ff1744;
 }
 
+/* NO MESSAGE */
 #noMsg {
-    margin-top: 35px;
-    font-size: 20px;
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    left: 0;
+    font-size: 22px;
     color: white;
-    min-height: 30px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    text-shadow: 0 0 12px rgba(255,255,255,0.9);
 }
 
-#finalMsg {
-    display: none;
-    font-size: 28px;
+/* BACK */
+.back {
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back h2 {
+    font-size: 30px;
     color: white;
     text-shadow: 0 0 20px rgba(255,255,255,1);
 }
@@ -109,58 +159,64 @@ button {
 
 <body>
 
-<!-- 🔥 STEP 1: FIREWORKS CANVAS -->
 <canvas id="fireworks"></canvas>
+<div class="hearts"></div>
 
 <div class="scene">
     <div class="card" id="card">
-        <h1>Muskan, Will You Be My Valentine?</h1>
+        
+        <!-- FRONT -->
+        <div class="side front">
+            <h1>Muskan, Will You Be My Valentine?</h1>
 
-        <div class="buttons">
-            <button id="yesBtn">Yes 💖</button>
-            <button id="noBtn">No 😜</button>
+            <div class="buttons">
+                <button id="yesBtn">Yes 💖</button>
+                <button id="noBtn">No 😜</button>
+            </div>
+
+            <div id="noMsg"></div>
         </div>
 
-        <div id="noMsg"></div>
-        <div id="finalMsg">Yayyy! 🎉 I Knew It 💕<br>You Just Made My World Complete 💖</div>
+        <!-- BACK -->
+        <div class="side back">
+            <h2>Yayyy 🎉 I Knew It 💕<br>You Made My World Brighter ✨</h2>
+        </div>
+
     </div>
 </div>
 
 <script>
-/* 💬 NO BUTTON LOGIC */
-const noMessages = [
-    "Are You Sure? 🥺",
-    "Think Again 💗",
-    "You’re Breaking My Heart 💔",
-    "Just Click Yes Already 😭",
-    "I’ll Be The Happiest Person 🥹",
-    "Last Chance 😌"
-];
-
-let noCount = 0;
-const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
 const noMsg = document.getElementById("noMsg");
-const finalMsg = document.getElementById("finalMsg");
 const card = document.getElementById("card");
 
+let noCount = 0;
+const noTexts = [
+    "Are You Serious? 😳",
+    "Think Again 😏",
+    "That Button Is Dangerous 👀",
+    "I Know You Want To Click Yes 💖",
+    "Stop Lying To Yourself 😜",
+    "Okay… This Is Getting Cute 😍"
+];
+
 noBtn.addEventListener("click", () => {
-    if (noCount < noMessages.length) {
-        noMsg.textContent = noMessages[noCount];
-        yesBtn.style.transform = `scale(${1 + noCount * 0.15})`;
+    if (noCount < noTexts.length) {
+        noMsg.textContent = noTexts[noCount];
         noCount++;
+
+        let scale = 1 + noCount * 0.15;
+        yesBtn.style.transform = `scale(${scale})`;
     }
 });
 
-/* 💖 YES CLICK */
 yesBtn.addEventListener("click", () => {
     card.classList.add("flip");
-    noMsg.style.display = "none";
-    finalMsg.style.display = "block";
     startFireworks();
 });
 
-/* 🎆 REAL FIREWORKS */
+/* REAL FIREWORKS */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -168,59 +224,79 @@ canvas.height = window.innerHeight;
 
 let fireworks = [];
 
-function random(min, max) {
-    return Math.random() * (max - min) + min;
+function startFireworks() {
+    setInterval(() => {
+        fireworks.push(new Firework());
+    }, 300);
 }
 
-function createFirework() {
-    const x = random(100, canvas.width - 100);
-    const y = random(100, canvas.height / 2);
-    const colors = ["#ff004c", "#ffcc00", "#00eaff", "#ffffff", "#ff6eff"];
+class Firework {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height * 0.5;
+        this.particles = [];
 
-    for (let i = 0; i < 80; i++) {
-        fireworks.push({
-            x,
-            y,
-            angle: Math.random() * Math.PI * 2,
-            speed: random(2, 6),
-            radius: 2,
-            alpha: 1,
-            color: colors[Math.floor(Math.random() * colors.length)]
+        for (let i = 0; i < 40; i++) {
+            this.particles.push({
+                x: this.x,
+                y: this.y,
+                angle: Math.random() * Math.PI * 2,
+                speed: Math.random() * 5 + 2,
+                life: 100,
+                color: `hsl(${Math.random()*360},100%,60%)`
+            });
+        }
+    }
+
+    update() {
+        this.particles.forEach(p => {
+            p.x += Math.cos(p.angle) * p.speed;
+            p.y += Math.sin(p.angle) * p.speed;
+            p.life--;
+        });
+    }
+
+    draw() {
+        this.particles.forEach(p => {
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+            ctx.fill();
         });
     }
 }
 
-function animateFireworks() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    fireworks.forEach((p, i) => {
-        p.x += Math.cos(p.angle) * p.speed;
-        p.y += Math.sin(p.angle) * p.speed;
-        p.alpha -= 0.015;
-
-        ctx.fillStyle = `rgba(${hexToRgb(p.color)},${p.alpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fill();
-
-        if (p.alpha <= 0) fireworks.splice(i, 1);
+function animate() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    fireworks.forEach((f, i) => {
+        f.update();
+        f.draw();
+        if (f.particles[0].life <= 0) fireworks.splice(i,1);
     });
-
-    requestAnimationFrame(animateFireworks);
+    requestAnimationFrame(animate);
 }
 
-function hexToRgb(hex) {
-    const bigint = parseInt(hex.replace("#",""), 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
-    return `${r},${g},${b}`;
+animate();
+    const heartsContainer = document.querySelector(".hearts");
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+    heart.style.fontSize = (16 + Math.random() * 20) + "px";
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 8000);
 }
 
-function startFireworks() {
-    setInterval(createFirework, 700);
-    animateFireworks();
-}
+setInterval(createHeart, 400);
+
 </script>
 
 </body>
