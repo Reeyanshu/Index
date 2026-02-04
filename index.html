@@ -1,176 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Will You Be My Valentine?</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
 
-  <style>
+<style>
     body {
-      margin: 0;
-      height: 100vh;
-      font-family: Calibri, "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(135deg, #ff6a88, #ff99ac);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff8fa3, #ff4d6d);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Calibri, sans-serif;
+        overflow: hidden;
+    }
+
+    .scene {
+        width: 420px;
+        height: 420px;
+        perspective: 1000px;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(12px);
-      border-radius: 24px;
-      padding: 40px 30px;
-      text-align: center;
-      width: 90%;
-      max-width: 380px;
-      box-shadow: 0 20px 40px rgba(255, 0, 90, 0.35);
-      transition: transform 0.3s ease;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1s;
     }
 
-    .shake {
-      animation: shake 0.6s;
+    .card.flip {
+        transform: rotateY(180deg);
     }
 
-    @keyframes shake {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(1deg); }
-      50% { transform: rotate(-1deg); }
-      75% { transform: rotate(1deg); }
-      100% { transform: rotate(0deg); }
+    .side {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(12px);
+        border-radius: 30px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        backface-visibility: hidden;
+        padding: 25px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .back {
+        transform: rotateY(180deg);
     }
 
     h1 {
-      color: white;
-      font-size: 1.9rem;
-      margin-bottom: 15px;
-      font-weight: 600;
+        color: white;
+        margin-bottom: 15px;
     }
 
     p {
-      color: white;
-      margin-bottom: 25px;
-      font-size: 1rem;
+        color: white;
+        font-size: 18px;
+        margin-bottom: 20px;
+        min-height: 30px;
     }
 
     .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
     }
 
     button {
-      border: none;
-      border-radius: 30px;
-      padding: 12px 26px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
+        border: none;
+        border-radius: 40px;
+        padding: 15px 35px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
-    #yesBtn {
-      background: #ff1e56;
-      color: white;
-      box-shadow: 0 0 15px rgba(255, 30, 86, 0.8);
+    #yes {
+        background: #ff1744;
+        color: white;
+        font-size: 20px;
     }
 
-    #noBtn {
-      background: rgba(255, 255, 255, 0.45);
-      color: white;
+    #no {
+        background: white;
+        color: #ff1744;
     }
 
-    #message {
-      color: white;
-      font-size: 1.1rem;
-      display: none;
-      margin-top: 15px;
-      min-height: 40px;
-    }
-
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 18px;
-      animation: float 6s linear infinite;
-      opacity: 0.8;
+    .hearts {
+        position: absolute;
+        animation: float 6s linear infinite;
+        opacity: 0.7;
     }
 
     @keyframes float {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-100vh); opacity: 0; }
+        from {
+            transform: translateY(100vh);
+        }
+        to {
+            transform: translateY(-10vh);
+        }
     }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <div class="card" id="card">
-    <h1>Muskan, Will You Be My Valentine? ❤️</h1>
-    <p>You make my heart smile every single day.</p>
+<div class="scene">
+    <div class="card" id="card">
 
-    <div class="buttons">
-      <button id="yesBtn" onclick="yesClicked()">YES 💖</button>
-      <button id="noBtn" onclick="noClicked()">NO 🙃</button>
+        <!-- FRONT -->
+        <div class="side front">
+            <h1>Muskan, Will You Be My Valentine? 💖</h1>
+            <p id="message">You make my every day brighter ✨</p>
+
+            <div class="buttons">
+                <button id="yes">YES 💖</button>
+                <button id="no">NO 😜</button>
+            </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="side back">
+            <h1>YAYYYYY 💕</h1>
+            <p>
+                I knew it!!! 🥹💖<br><br>
+                You just made me the happiest person alive 💘<br><br>
+                I love you endlessly 💞
+            </p>
+        </div>
+
     </div>
+</div>
 
-    <div id="message"></div>
-  </div>
-
-  <script>
-    let noCount = 0;
-    let yesScale = 1;
-
+<script>
     const noMessages = [
-      "😲 Are you serious?",
-      "😐 Think again…",
-      "🥺 That kinda hurt, not gonna lie.",
-      "😔 I was so sure you’d say yes.",
-      "😩 Okay now you’re just playing with my heart.",
-      "❤️ At this point, you know the right answer."
+        "Are you sure? 🥺",
+        "Think again 😢",
+        "My heart is breaking 💔",
+        "Pleaseee 🥹",
+        "Last chance 😭",
+        "Okay… now you HAVE to say yes 😤"
     ];
 
-    function noClicked() {
-      const message = document.getElementById("message");
-      const yesBtn = document.getElementById("yesBtn");
+    let noCount = 0;
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const msg = document.getElementById("message");
+    const card = document.getElementById("card");
 
-      message.style.display = "block";
-      message.innerHTML = noMessages[Math.min(noCount, noMessages.length - 1)];
+    noBtn.addEventListener("click", () => {
+        if (noCount < noMessages.length) {
+            msg.innerText = noMessages[noCount];
+            noCount++;
+            let scale = 1 + noCount * 0.2;
+            yesBtn.style.transform = `scale(${scale})`;
+        }
+    });
 
-      yesScale += 0.25;
-      yesBtn.style.transform = `scale(${yesScale})`;
+    yesBtn.addEventListener("click", () => {
+        card.classList.add("flip");
+    });
 
-      noCount++;
-    }
-
-    function yesClicked() {
-      const message = document.getElementById("message");
-      const card = document.getElementById("card");
-
-      card.classList.add("shake");
-
-      message.style.display = "block";
-      message.innerHTML =
-        "🎉 Yay! I knew it 😌💖<br>You just made me the happiest person alive.<br>I love you endlessly ❤️";
-
-      setTimeout(() => {
-        card.classList.remove("shake");
-      }, 600);
-    }
-
-    // Floating hearts
+    // floating hearts
     setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-      document.body.appendChild(heart);
+        const heart = document.createElement("div");
+        heart.className = "hearts";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+        document.body.appendChild(heart);
 
-      setTimeout(() => heart.remove(), 6000);
-    }, 400);
-  </script>
+        setTimeout(() => heart.remove(), 6000);
+    }, 300);
+</script>
 
 </body>
 </html>
