@@ -8,6 +8,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
+    .final-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 18px;
+}
+
+.final-text .line {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    text-shadow: 
+        0 0 10px rgba(255,255,255,0.9),
+        0 0 20px rgba(255,255,255,0.6);
+}
+
+.final-text .big {
+    font-size: 36px;
+    font-weight: 700;
+    text-shadow:
+        0 0 15px rgba(255,255,255,1),
+        0 0 30px rgba(255,182,193,0.9);
+}
+
     .hearts {
     position: fixed;
     bottom: -10px;
@@ -191,17 +217,15 @@ button {
         </div>
 
         <!-- BACK -->
-        <div class="side back">
-            <h1>Yayyyy 💕</h1>
-            <p>
-                I Knew It 🥹<br><br>
-                You Just Made My World Complete 💘<br><br>
-                I Love You Forever 💞
-            </p>
-        </div>
-
+<div class="side back">
+    <div class="final-text">
+        <div class="line big">Yayyyy 💕</div>
+        <div class="line">I Knew It 🥹</div>
+        <div class="line">You Just Made My World Complete 💘</div>
+        <div class="line">I Love You Forever 💞</div>
     </div>
 </div>
+
 <script>
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
