@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <title>Valentine 💖</title>
 
-<!-- Romantic Elegant Font -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<!-- Attractive romantic font -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
     body {
@@ -13,16 +13,17 @@
         height: 100vh;
         background: linear-gradient(135deg, #ff8fa3, #ff4d6d);
         display: flex;
-        justify-content: center;
         align-items: center;
-        font-family: 'Playfair Display', serif;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
         overflow: hidden;
     }
 
     .scene {
-        width: 460px;
-        height: 460px;
-        perspective: 1200px;
+        width: 420px;
+        height: 420px;
+        perspective: 1000px;
+        z-index: 2;
     }
 
     .card {
@@ -30,7 +31,7 @@
         height: 100%;
         position: relative;
         transform-style: preserve-3d;
-        transition: transform 1s ease;
+        transition: transform 1s;
     }
 
     .card.flip {
@@ -41,18 +42,18 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.22);
-        backdrop-filter: blur(16px);
-        border-radius: 32px;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(14px);
+        border-radius: 30px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 30px;
+        backface-visibility: hidden;
+        padding: 25px;
         box-sizing: border-box;
         text-align: center;
-        backface-visibility: hidden;
     }
 
     .back {
@@ -60,64 +61,84 @@
     }
 
     h1 {
-        font-size: 34px;
+        font-family: 'Great Vibes', cursive;
+        font-size: 46px;
         color: white;
-        margin-bottom: 18px;
+        margin-top: -20px; /* moved UP */
+        margin-bottom: 20px;
         text-shadow:
-            0 0 8px rgba(255,255,255,0.9),
-            0 0 18px rgba(255,120,150,0.9);
+            0 0 10px #fff,
+            0 0 20px #ff4d6d,
+            0 0 30px #ff1744;
     }
 
     p {
-        font-size: 22px;
         color: white;
-        min-height: 40px;
-        margin-bottom: 26px;
-        text-shadow:
-            0 0 6px rgba(255,255,255,0.8),
-            0 0 14px rgba(255,140,170,0.9);
+        font-size: 20px;
+        margin-bottom: 20px;
+        min-height: 32px;
+        text-shadow: 0 0 10px rgba(255,255,255,0.8);
     }
 
     .buttons {
         display: flex;
-        gap: 18px;
+        gap: 15px;
+        margin-top: 10px;
     }
 
     button {
         border: none;
-        border-radius: 50px;
-        padding: 16px 40px;
-        font-size: 20px;
+        border-radius: 40px;
+        padding: 15px 35px;
+        font-size: 18px;
         cursor: pointer;
-        transition: all 0.35s ease;
-        font-family: 'Playfair Display', serif;
+        transition: all 0.3s ease;
+        font-family: 'Poppins', sans-serif;
     }
 
     #yes {
-        background: linear-gradient(135deg, #ff1744, #ff4d6d);
+        background: #ff1744;
         color: white;
-        font-size: 22px;
-        box-shadow:
-            0 0 15px rgba(255, 23, 68, 0.9),
-            0 0 35px rgba(255, 77, 109, 0.9);
+        font-size: 20px;
+        box-shadow: 0 0 20px rgba(255,23,68,0.9);
     }
 
     #no {
         background: white;
         color: #ff1744;
-        font-size: 18px;
     }
 
-    .heart {
+    /* Floating hearts */
+    .hearts {
         position: absolute;
         animation: float 6s linear infinite;
-        opacity: 0.8;
+        opacity: 0.7;
         pointer-events: none;
     }
 
     @keyframes float {
         from { transform: translateY(100vh); }
         to { transform: translateY(-10vh); }
+    }
+
+    /* Fireworks */
+    .firework {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: transparent;
+        border-radius: 50%;
+        box-shadow:
+            0 0 10px #fff,
+            0 0 20px #ff4d6d,
+            0 0 30px #ff1744;
+        animation: explode 1s ease-out forwards;
+        pointer-events: none;
+    }
+
+    @keyframes explode {
+        from { transform: scale(0); opacity: 1; }
+        to { transform: scale(15); opacity: 0; }
     }
 </style>
 </head>
@@ -129,21 +150,21 @@
 
         <!-- FRONT -->
         <div class="side front">
-            <h1>Muskan, Will You Be My Valentine? 💖</h1>
-            <p id="message">You Make My World Brighter Every Single Day ✨</p>
+            <h1>Muskan, Will You Be My Valentine?</h1>
+            <p id="message"></p>
 
             <div class="buttons">
-                <button id="yes">Yes 💖</button>
-                <button id="no">No 😜</button>
+                <button id="yes">YES 💖</button>
+                <button id="no">NO 😜</button>
             </div>
         </div>
 
         <!-- BACK -->
         <div class="side back">
-            <h1>Yayyy! I Knew It 💕</h1>
+            <h1>Yayyyy 💕</h1>
             <p>
-                You Just Made My Heart The Happiest 💖<br><br>
-                I Promise To Make You Smile Every Day ✨<br><br>
+                I Knew It!!! 🥹💖<br><br>
+                You Just Made Me The Happiest Person Alive 💘<br><br>
                 I Love You Endlessly 💞
             </p>
         </div>
@@ -153,41 +174,53 @@
 
 <script>
     const noMessages = [
-        "Are You Serious? 😲",
-        "Please Think Again 🥺",
-        "This Is Breaking My Heart 💔",
-        "You Are Playing With Me 😢",
-        "Okay… This Is Getting Painful 😭",
-        "Now You Have No Choice 😤"
+        "Are You Serious? 😳",
+        "Think Again 😢",
+        "My Heart Is Breaking 💔",
+        "Pleaseee 🥺",
+        "Don’t Do This To Me 😭",
+        "Okay… Now You Have To Say Yes 😤"
     ];
 
-    let count = 0;
+    let noCount = 0;
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
     const msg = document.getElementById("message");
     const card = document.getElementById("card");
 
     noBtn.addEventListener("click", () => {
-        if (count < noMessages.length) {
-            msg.innerText = noMessages[count];
-            count++;
-            yesBtn.style.transform = `scale(${1 + count * 0.25})`;
+        if (noCount < noMessages.length) {
+            msg.innerText = noMessages[noCount];
+            noCount++;
+            yesBtn.style.transform = `scale(${1 + noCount * 0.25})`;
         }
     });
 
     yesBtn.addEventListener("click", () => {
         card.classList.add("flip");
+        launchFireworks();
     });
 
-    // floating hearts
+    function launchFireworks() {
+        for (let i = 0; i < 20; i++) {
+            const fw = document.createElement("div");
+            fw.className = "firework";
+            fw.style.left = Math.random() * 100 + "vw";
+            fw.style.top = Math.random() * 100 + "vh";
+            document.body.appendChild(fw);
+            setTimeout(() => fw.remove(), 1000);
+        }
+    }
+
+    // Floating hearts
     setInterval(() => {
-        const h = document.createElement("div");
-        h.className = "heart";
-        h.innerHTML = "💖";
-        h.style.left = Math.random() * 100 + "vw";
-        h.style.fontSize = (Math.random() * 22 + 14) + "px";
-        document.body.appendChild(h);
-        setTimeout(() => h.remove(), 6000);
+        const heart = document.createElement("div");
+        heart.className = "hearts";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 12) + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
     }, 300);
 </script>
 
