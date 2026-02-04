@@ -4,142 +4,158 @@
 <meta charset="UTF-8">
 <title>Valentine 💖</title>
 
-<!-- Attractive romantic font -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<!-- Playfair Display font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        background: linear-gradient(135deg, #ff8fa3, #ff4d6d);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Poppins', sans-serif;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff8fa3, #ff4d6d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    overflow: hidden;
+}
 
-    .scene {
-        width: 420px;
-        height: 420px;
-        perspective: 1000px;
-        z-index: 2;
-    }
+/* CARD */
+.scene {
+    width: 420px;
+    height: 420px;
+    perspective: 1000px;
+    z-index: 2;
+}
 
-    .card {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: transform 1s;
-    }
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
 
-    .card.flip {
-        transform: rotateY(180deg);
-    }
+.card.flip {
+    transform: rotateY(180deg);
+}
 
-    .side {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(14px);
-        border-radius: 30px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        backface-visibility: hidden;
-        padding: 25px;
-        box-sizing: border-box;
-        text-align: center;
-    }
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(14px);
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    padding: 30px;
+    text-align: center;
+}
 
-    .back {
-        transform: rotateY(180deg);
-    }
+.back {
+    transform: rotateY(180deg);
+}
 
-    h1 {
-        font-family: 'Great Vibes', cursive;
-        font-size: 46px;
-        color: white;
-        margin-top: -20px; /* moved UP */
-        margin-bottom: 20px;
-        text-shadow:
-            0 0 10px #fff,
-            0 0 20px #ff4d6d,
-            0 0 30px #ff1744;
-    }
+/* MAIN TEXT */
+h1 {
+    font-size: 42px;
+    color: white;
+    margin-top: -30px;
+    margin-bottom: 10px;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff4d6d,
+        0 0 35px #ff1744;
+}
 
-    p {
-        color: white;
-        font-size: 20px;
-        margin-bottom: 20px;
-        min-height: 32px;
-        text-shadow: 0 0 10px rgba(255,255,255,0.8);
-    }
+/* NO MESSAGE */
+#message {
+    font-size: 24px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow:
+        0 0 8px #fff,
+        0 0 15px #ff4d6d;
+    min-height: 34px;
+}
 
-    .buttons {
-        display: flex;
-        gap: 15px;
-        margin-top: 10px;
-    }
+/* BUTTONS */
+.buttons {
+    display: flex;
+    gap: 15px;
+}
 
-    button {
-        border: none;
-        border-radius: 40px;
-        padding: 15px 35px;
-        font-size: 18px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-family: 'Poppins', sans-serif;
-    }
+button {
+    border: none;
+    border-radius: 40px;
+    padding: 15px 35px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Playfair Display', serif;
+}
 
-    #yes {
-        background: #ff1744;
-        color: white;
-        font-size: 20px;
-        box-shadow: 0 0 20px rgba(255,23,68,0.9);
-    }
+#yes {
+    background: #ff1744;
+    color: white;
+    box-shadow: 0 0 25px rgba(255,23,68,0.9);
+}
 
-    #no {
-        background: white;
-        color: #ff1744;
-    }
+#no {
+    background: white;
+    color: #ff1744;
+}
 
-    /* Floating hearts */
-    .hearts {
-        position: absolute;
-        animation: float 6s linear infinite;
-        opacity: 0.7;
-        pointer-events: none;
-    }
+/* BACK TEXT */
+.back h1 {
+    font-size: 40px;
+}
 
-    @keyframes float {
-        from { transform: translateY(100vh); }
-        to { transform: translateY(-10vh); }
-    }
+.back p {
+    font-size: 22px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255,255,255,0.9);
+}
 
-    /* Fireworks */
-    .firework {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        background: transparent;
-        border-radius: 50%;
-        box-shadow:
-            0 0 10px #fff,
-            0 0 20px #ff4d6d,
-            0 0 30px #ff1744;
-        animation: explode 1s ease-out forwards;
-        pointer-events: none;
-    }
+/* HEARTS */
+.heart {
+    position: absolute;
+    font-size: 16px;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+}
 
-    @keyframes explode {
-        from { transform: scale(0); opacity: 1; }
-        to { transform: scale(15); opacity: 0; }
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+
+/* FIREWORK PARTICLES */
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #fff, #ff4d6d, transparent);
+    border-radius: 50%;
+    animation: burst 1.2s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes burst {
+    from {
+        transform: scale(0);
+        opacity: 1;
     }
+    to {
+        transform: scale(20);
+        opacity: 0;
+    }
+}
 </style>
 </head>
 
@@ -151,11 +167,11 @@
         <!-- FRONT -->
         <div class="side front">
             <h1>Muskan, Will You Be My Valentine?</h1>
-            <p id="message"></p>
+            <div id="message"></div>
 
             <div class="buttons">
-                <button id="yes">YES 💖</button>
-                <button id="no">NO 😜</button>
+                <button id="yes">Yes 💖</button>
+                <button id="no">No 😜</button>
             </div>
         </div>
 
@@ -163,9 +179,9 @@
         <div class="side back">
             <h1>Yayyyy 💕</h1>
             <p>
-                I Knew It!!! 🥹💖<br><br>
-                You Just Made Me The Happiest Person Alive 💘<br><br>
-                I Love You Endlessly 💞
+                I Knew It 🥹💖<br><br>
+                You Just Made My World Complete 💘<br><br>
+                I Love You Forever 💞
             </p>
         </div>
 
@@ -173,55 +189,56 @@
 </div>
 
 <script>
-    const noMessages = [
-        "Are You Serious? 😳",
-        "Think Again 😢",
-        "My Heart Is Breaking 💔",
-        "Pleaseee 🥺",
-        "Don’t Do This To Me 😭",
-        "Okay… Now You Have To Say Yes 😤"
-    ];
+const noMessages = [
+    "Are You Serious? 😳",
+    "Please Think Again 🥺",
+    "My Heart Is Breaking 💔",
+    "This Is Getting Painful 😭",
+    "Don’t Do This To Me 😭",
+    "Okay… Now You Have To Say Yes 😤"
+];
 
-    let noCount = 0;
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const msg = document.getElementById("message");
-    const card = document.getElementById("card");
+let noCount = 0;
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const msg = document.getElementById("message");
+const card = document.getElementById("card");
 
-    noBtn.addEventListener("click", () => {
-        if (noCount < noMessages.length) {
-            msg.innerText = noMessages[noCount];
-            noCount++;
-            yesBtn.style.transform = `scale(${1 + noCount * 0.25})`;
-        }
-    });
-
-    yesBtn.addEventListener("click", () => {
-        card.classList.add("flip");
-        launchFireworks();
-    });
-
-    function launchFireworks() {
-        for (let i = 0; i < 20; i++) {
-            const fw = document.createElement("div");
-            fw.className = "firework";
-            fw.style.left = Math.random() * 100 + "vw";
-            fw.style.top = Math.random() * 100 + "vh";
-            document.body.appendChild(fw);
-            setTimeout(() => fw.remove(), 1000);
-        }
+noBtn.addEventListener("click", () => {
+    if (noCount < noMessages.length) {
+        msg.innerText = noMessages[noCount];
+        noCount++;
+        yesBtn.style.transform = `scale(${1 + noCount * 0.25})`;
     }
+});
 
-    // Floating hearts
-    setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "hearts";
-        heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (Math.random() * 20 + 12) + "px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-    }, 300);
+yesBtn.addEventListener("click", () => {
+    card.classList.add("flip");
+    fireworks();
+});
+
+/* REAL FIREWORKS */
+function fireworks() {
+    for (let i = 0; i < 30; i++) {
+        const f = document.createElement("div");
+        f.className = "firework";
+        f.style.left = Math.random() * 100 + "vw";
+        f.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(f);
+        setTimeout(() => f.remove(), 1200);
+    }
+}
+
+/* FLOATING HEARTS */
+setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (Math.random() * 20 + 14) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+}, 300);
 </script>
 
 </body>
